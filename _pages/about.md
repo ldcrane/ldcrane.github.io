@@ -1,17 +1,16 @@
 ---
 permalink: /
-title: "UNDER CONSTRUCTION!!!"
-excerpt: "Papers"
+# title: "UNDER CONSTRUCTION!!!"
+# excerpt: "Papers"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
+I am a principal economist at the Federal Reserve Board, working on labor markets, search & matching, nontraditional data, and machine learning  
 
-[CV](/files/crane-CV.pdf) 
-======
-
+- [CV](/files/crane-CV.pdf) 
 
 Papers
 ======
