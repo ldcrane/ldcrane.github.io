@@ -1,12 +1,17 @@
 ---
 permalink: /
-title: "academicpages is a ready-to-fork GitHub Pages template for academic personal websites"
-excerpt: "About me"
+title: "UNDER CONSTRUCTION!!!"
+excerpt: "Papers"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
+
+- [The Labor Market During the Beginning of the Pandemic Recession](https://www.brookings.edu/wp-content/uploads/2020/06/SU20_S1_Cajner-et-al._-combined.pdf) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), [John Grigsby](https://sites.google.com/view/john-grigsby/), Adrian Hamins-Puertolas, [Erik Hurst](https://erikhurst.com/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), and Ahu Yildirmaz) *Brookings Papers in Economic Activity, Summer 2020*
+
+-[Improving the Accuracy of Economic Measurement with Multiple Data Sources: The Case of Payroll Employment Data](https://www.nber.org/books-and-chapters/big-data-twenty-first-century-economic-statistics/improving-accuracy-economic-measurement-multiple-data-sources-case-payroll-employment-data)  (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *Forthcoming in NBER volume "Big Data for Twenty-First Century Statistics"*
+
 
 This is the front page of a website that is powered by the [academicpages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io).
 

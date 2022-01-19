@@ -18,6 +18,15 @@ gem "github-pages", group: :jekyll_plugins
 
 gem "wdm", "~> 0.1.0" if Gem.win_platform?
 
+# LDC: fixing a missing timezone error
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+# LDC fixing more errors
+gem 'eventmachine', '1.2.7', git: 'https://github.com/eventmachine/eventmachine.git', tag: 'v1.2.7'
+
+# LDC fixing the error: Auto-regeneration: enabled for `require': cannot load such file -- webrick (LoadError)
+gem "webrick"
+
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   # gem "jekyll-archives"
