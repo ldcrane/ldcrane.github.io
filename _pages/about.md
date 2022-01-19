@@ -26,7 +26,7 @@ Papers
 
 - [**Business Exit During the COVID-19 Pandemic: Non-Traditional Measures in Historical Context**](https://www.federalreserve.gov/econres/feds/business-exit-during-the-covid-19-pandemic.htm) (joint with, [Ryan A. Decker](https://www.rdecker.net/), [Aaron B. Flaaen](https://www.aaronflaaen.com/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *Working Paper, 2020*
 
-- [**Cyclical Labor Market Sorting**](https://drive.google.com/file/d/1-Y3g26szsOYuM9iT_TojjqkbNrPbifkl/view) (joint with [Henry R. Hyatt](https://henryrhyatt.com/) and [Seth Murray](https://www.sethmurrayecon.com/)) *Working Paper, 2020*  
+- [**Cyclical Labor Market Sorting**](/files/worker-sorting-2020.pdf) (joint with [Henry R. Hyatt](https://henryrhyatt.com/) and [Seth Murray](https://www.sethmurrayecon.com/)) *Working Paper, 2020*  
 
 - [**Tracking Labor Market Developments during the COVID-19 Pandemic: A Preliminary Assessment**](https://www.federalreserve.gov/econres/feds/files/2020030pap.pdf)  (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *Working Paper, 2020*
 
@@ -46,7 +46,7 @@ Shorter Papers
 On Hiatus 
 ======
 
-- [**Supermodularity and Search**](https://drive.google.com/file/d/1Nql4r3LmuPhsOIz2Ux-LVK-wG7KkEOST/view), *2018*
+- [**Supermodularity and Search**](/files/spm-and-search-2018.pdf), *2018*
 
 - [**Firm Dynamics and Assortative Matching**](https://www2.census.gov/ces/wp/2014/CES-WP-14-25.pdf), *2014*
 
