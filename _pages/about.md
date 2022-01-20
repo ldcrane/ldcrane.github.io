@@ -10,6 +10,8 @@ redirect_from:
   - /about.html
 ---
 
+![Beveridge Curve](/images/bev-curve.png)
+
 I am a principal economist at the Federal Reserve Board, working on labor markets, search & matching, nontraditional data, and machine learning.
 
 - [**CV**](/files/crane-CV.pdf) 
