@@ -14,6 +14,8 @@ redirect_from:
 
 I am a principal economist at the Federal Reserve Board, working on labor markets, search & matching, nontraditional data, and machine learning.
 
+This is a personal website. Any results or conclusions in the research presented on this website are my own and do not necessarily represent the view of the Federal Reserve System. 
+
 - [**CV**](/files/crane-CV.pdf) 
 
 Papers
