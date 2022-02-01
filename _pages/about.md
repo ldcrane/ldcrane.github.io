@@ -22,6 +22,7 @@ Papers
 ======
 
 - [**The $800 Billion Paycheck Protection Program: Where Did the Money Go and Why Did it Go There?**](https://www.nber.org/papers/w29669) (joint with [David Autor](https://economics.mit.edu/faculty/dautor), [David Cho](https://www.david-cho.com/), Mita Goldar, [Byron Lutz](https://sites.google.com/view/byron-lutz/home), [Joshua K. Montes](https://sites.google.com/site/joshuamontes/), [William B. Peterman](http://williampeterman.com/), [David D. Ratner](https://sites.google.com/site/ddratner/), [Daniel Villar Vallenas](https://www.federalreserve.gov/econres/daniel-villar-vallenas.htm), and Ahu Yildirmaz) *Working Paper, 2022* 
+  - Media coverage: [The Economist](https://www.economist.com/graphic-detail/2022/01/31/americas-covid-job-saving-programme-gave-most-of-its-cash-to-the-rich), [New York Times](https://www.nytimes.com/2022/02/01/business/paycheck-protection-program-costs.html)
 
 - [**The Labor Market During the Beginning of the Pandemic Recession**](https://www.brookings.edu/wp-content/uploads/2020/06/SU20_S1_Cajner-et-al._-combined.pdf) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), [John Grigsby](https://sites.google.com/view/john-grigsby/), Adrian Hamins-Puertolas, [Erik Hurst](https://erikhurst.com/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), and Ahu Yildirmaz) *Brookings Papers in Economic Activity, Summer 2020*
 
