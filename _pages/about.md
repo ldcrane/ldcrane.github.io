@@ -15,7 +15,7 @@ redirect_from:
 ---
 
 
-I am a principal economist at the Federal Reserve Board, working on nontraditional data, labor markets, search & matching, and machine learning.
+I am a principal economist at the Federal Reserve Board, working on nontraditional data, machine learning, NLP, labor markets, and search & matching.
 
 This is a personal website. Any results or conclusions in the research presented on this website are my own and do not necessarily represent the view of the Federal Reserve System. 
 
@@ -24,7 +24,7 @@ This is a personal website. Any results or conclusions in the research presented
 Published and Forthcoming Papers
 ======
 
-- [**Cyclical Labor Market Sorting**](/files/worker-sorting-2020.pdf) (joint with [Henry R. Hyatt](https://henryrhyatt.com/) and [Seth Murray](https://www.sethmurrayecon.com/)) *forthcoming in the Journal of Econometrics, special issue on AKM*  
+- [**Cyclical Labor Market Sorting**](/files/worker-sorting-2020.pdf) (joint with [Henry R. Hyatt](https://henryrhyatt.com/) and [Seth Murray](https://www.sethmurrayecon.com/)) *Journal of Econometrics, 2023*  
 
 - [**Business Exit During the COVID-19 Pandemic: Non-Traditional Measures in Historical Context**](https://www.federalreserve.gov/econres/feds/business-exit-during-the-covid-19-pandemic.htm) (joint with, [Ryan A. Decker](https://www.rdecker.net/), [Aaron B. Flaaen](https://www.aaronflaaen.com/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *Journal of Macroeconomics, 2022*
 
@@ -46,6 +46,8 @@ Published and Forthcoming Papers
 Working Papers
 ======
 
+- [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm.pdf) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
+- 
 - [**Dynamic Beveridge Curve Accounting**](https://www.federalreserve.gov/econres/feds/files/2020027pap.pdf) (joint with [Hie Joo Ahn](https://sites.google.com/site/hiejooahn/)) *Working Paper, 2020*
 
 - [**Tracking Labor Market Developments during the COVID-19 Pandemic: A Preliminary Assessment**](https://www.federalreserve.gov/econres/feds/files/2020030pap.pdf)  (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *Working Paper, 2020*
