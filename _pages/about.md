@@ -1,6 +1,6 @@
 ---
 permalink: /
-# title: "UNDER CONSTRUCTION!!!"
+# title: "Main"
 # excerpt: "Papers"
 
 #LDC to get an image at the top of the page insert this on the first line, between "---" and "I am a..."
@@ -31,7 +31,6 @@ Published and Forthcoming Papers
 - [**The $800 Billion Paycheck Protection Program: Where Did the Money Go and Why Did it Go There?**](https://www.nber.org/papers/w29669) (joint with [David Autor](https://economics.mit.edu/faculty/dautor), [David Cho](https://www.david-cho.com/), Mita Goldar, [Byron Lutz](https://sites.google.com/view/byron-lutz/home), [Joshua K. Montes](https://sites.google.com/site/joshuamontes/), [William B. Peterman](http://williampeterman.com/), [David D. Ratner](https://sites.google.com/site/ddratner/), [Daniel Villar Vallenas](https://www.federalreserve.gov/econres/daniel-villar-vallenas.htm), and Ahu Yildirmaz) *Journal of Economic Perspectives, 2022* 
   - Media coverage: [The Economist](https://www.economist.com/graphic-detail/2022/01/31/americas-covid-job-saving-programme-gave-most-of-its-cash-to-the-rich), [New York Times](https://www.nytimes.com/2022/02/01/business/paycheck-protection-program-costs.html)
 
-
 - [**An Evaluation of the Paycheck Protection Program Using Administrative Payroll Microdata**](https://blueprintlabs.mit.edu/research/an-evaluation-of-the-paycheck-protection-program-using-administrative-payroll-microdata/) (joint with [David Autor](https://economics.mit.edu/faculty/dautor), [David Cho](https://www.david-cho.com/), Mita Goldar, [Byron Lutz](https://sites.google.com/view/byron-lutz/home), [Joshua K. Montes](https://sites.google.com/site/joshuamontes/), [William B. Peterman](http://williampeterman.com/), [David D. Ratner](https://sites.google.com/site/ddratner/), [Daniel Villar Vallenas](https://www.federalreserve.gov/econres/daniel-villar-vallenas.htm), and Ahu Yildirmaz) *Journal of Public Economics (short communication), 2022*
 
   - Media coverage: [New York Times](https://www.nytimes.com/2020/07/22/briefing/paycheck-protection-program-houston-chicago-your-wednesday-briefing.html), [Washington Post](https://www.washingtonpost.com/business/on-small-business/small-business-loans-saved-as-many-as-32-million-us-jobs/2020/07/22/dd92cf80-cc2c-11ea-99b0-8426e26d203b_story.html), [Slate](https://slate.com/business/2020/07/paycheck-protection-program-was-a-flop.html)
@@ -40,11 +39,24 @@ Published and Forthcoming Papers
 
   - Media Coverage: [Washington Post](https://www.washingtonpost.com/business/2020/05/08/awful-reason-wages-appeared-soar-middle-pandemic/), [New York Times](https://www.nytimes.com/2020/05/11/upshot/virus-lasting-economic-effects.html), [The Economist](https://www.economist.com/finance-and-economics/2020/05/16/why-the-pandemic-could-eventually-lower-inequality), [Associated Press](https://apnews.com/8df9ba7b96e1563c176c3485398adb99)
 
-
 - [**Improving the Accuracy of Economic Measurement with Multiple Data Sources: The Case of Payroll Employment Data**](https://www.nber.org/books-and-chapters/big-data-twenty-first-century-economic-statistics/improving-accuracy-economic-measurement-multiple-data-sources-case-payroll-employment-data)  (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *NBER volume "Big Data for Twenty-First Century Statistics", 2022*
+
+Shorter Papers
+======
+
+- [**Measuring AI Uptake in the Workplace**](https://www.federalreserve.gov/econres/notes/feds-notes/measuring-ai-uptake-in-the-workplace-20240205.html) (joint with [Paul Soto](https://pesoto.github.io/) and Michael Green) *FEDS Note, 2025*
+
+- [**Payroll Employment at the Weekly Frequency**](https://www.aeaweb.org/articles?id=10.1257/pandp.20231052)  (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *AEA P&P, 2023*
+
+- [**Tracking the Labor Market with "Big Data"**](https://www.federalreserve.gov/econres/notes/feds-notes/tracking-the-labor-market-with-big-data-20190920.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *FEDS Note, 2019*
+
 
 Working Papers
 ======
+
+- **Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models** (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Draft coming soon*
+
+- [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *Submitted*
 
 - [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm.pdf) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
   
@@ -66,7 +78,3 @@ On Hiatus
 
 - [**Firm Dynamics and Assortative Matching**](https://www2.census.gov/ces/wp/2014/CES-WP-14-25.pdf), *2014*
 
-Shorter Papers
-======
-
-- [**Tracking the Labor Market with "Big Data"**](https://www.federalreserve.gov/econres/notes/feds-notes/tracking-the-labor-market-with-big-data-20190920.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *FEDS Note, 2019*
