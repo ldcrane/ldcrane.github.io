@@ -21,6 +21,17 @@ This is a personal website. Any results or conclusions in the research presented
 
 - [**CV**](/files/crane-CV.pdf) 
 
+
+Recent Working Papers
+======
+
+- [**Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models**](https://www.federalreserve.gov/econres/feds/total-recall-evaluating-the-macroeconomic-knowledge-of-large-language-models.htm) (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Draft coming soon*
+
+- [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *Submitted*
+
+- [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm.pdf) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
+
+  
 Published and Forthcoming Papers
 ======
 
@@ -51,15 +62,9 @@ Shorter Papers
 - [**Tracking the Labor Market with "Big Data"**](https://www.federalreserve.gov/econres/notes/feds-notes/tracking-the-labor-market-with-big-data-20190920.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *FEDS Note, 2019*
 
 
-Working Papers
+Older Working Papers
 ======
 
-- **Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models** (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Draft coming soon*
-
-- [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *Submitted*
-
-- [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm.pdf) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
-  
 - [**Dynamic Beveridge Curve Accounting**](https://www.federalreserve.gov/econres/feds/files/2020027pap.pdf) (joint with [Hie Joo Ahn](https://sites.google.com/site/hiejooahn/)) *Working Paper, 2020*
 
 - [**Tracking Labor Market Developments during the COVID-19 Pandemic: A Preliminary Assessment**](https://www.federalreserve.gov/econres/feds/files/2020030pap.pdf)  (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Ryan A. Decker](https://www.rdecker.net/), Adrian Hamins-Puertolas, and [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm)) *Working Paper, 2020*
