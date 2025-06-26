@@ -25,7 +25,7 @@ This is a personal website. Any results or conclusions in the research presented
 Recent Working Papers
 ======
 
-- [**Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models**](https://www.federalreserve.gov/econres/feds/total-recall-evaluating-the-macroeconomic-knowledge-of-large-language-models.htm) (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Draft coming soon*
+- [**Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models**](https://www.federalreserve.gov/econres/feds/total-recall-evaluating-the-macroeconomic-knowledge-of-large-language-models.htm) (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Working Paper, 2025*
 
 - [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *Submitted*
 
