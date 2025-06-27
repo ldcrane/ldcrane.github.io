@@ -29,7 +29,7 @@ Recent Working Papers
 
 - [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *Submitted*
 
-- [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm.pdf) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
+- [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
 
   
 Published and Forthcoming Papers
