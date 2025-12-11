@@ -25,15 +25,17 @@ This is a personal website. Any results or conclusions in the research presented
 Recent Working Papers
 ======
 
-- [**Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models**](https://www.federalreserve.gov/econres/feds/total-recall-evaluating-the-macroeconomic-knowledge-of-large-language-models.htm) (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Working Paper, 2025*
+- [**LLM on a Budget: Active Knowledge Distillation for Efficient Classification of Large Text Corpora**](https://www.arxiv.org/abs/2511.11574) (joint with Viviana Luccioli, Rithika Iyengar, Ryan Panley, [Flora Haberkorn](https://www.federalreserve.gov/econres/flora-m-haberkorn.htm), Xiaoyu Ge, [Nitish Sinha](https://www.federalreserve.gov/econres/nitish-r-sinha.htm), and [Seung Jung Lee](https://sites.google.com/site/seunglee98))
 
-- [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *Submitted*
+- [**Total Recall? Evaluating the Macroeconomic Knowledge of Large Language Models**](https://www.federalreserve.gov/econres/feds/total-recall-evaluating-the-macroeconomic-knowledge-of-large-language-models.htm) (joint with [Paul Soto](https://pesoto.github.io/) and Akhil Karra) *Working Paper, 2025*
 
 - [**Tracking Real Time Layoffs with SEC Filings: A Preliminary Investigation**](https://www.federalreserve.gov/econres/feds/tracking-real-time-layoffs-with-sec-filings-a-preliminary-investigation.htm) (joint with Emily Green, Molly Harnish, Will McClennan, [Paul E. Soto](https://pesoto.github.io/), Betsy Vrankovich, and Jacob Williams) *Working Paper, 2024*
 
   
 Published and Forthcoming Papers
 ======
+
+- [**Manufacturing Sentiment: Forecasting Industrial Production with Text Analysis**](https://www.federalreserve.gov/econres/feds/manufacturing-sentiment-forecasting-industrial-production-with-text-analysis.htm) (joint with [Tomaz Cajner](https://sites.google.com/site/cajner/), [Christopher Kurz](https://www.federalreserve.gov/econres/christopher-j-kurz.htm), Norman Morin, and  [Paul Soto](https://pesoto.github.io/)) *JAE, forthcoming*
 
 - [**Cyclical Labor Market Sorting**](/files/worker-sorting-2020.pdf) (joint with [Henry R. Hyatt](https://henryrhyatt.com/) and [Seth Murray](https://www.sethmurrayecon.com/)) *Journal of Econometrics, 2023*  
 
