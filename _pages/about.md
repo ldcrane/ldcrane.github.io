@@ -15,7 +15,7 @@ redirect_from:
 ---
 
 
-I am a principal economist at the Federal Reserve Board working on nontraditional data, machine learning, NLP, labor markets, and search & matching.
+I am a principal economist at the Federal Reserve Board working on nontraditional data, AI, labor markets, and search & matching.
 
 This is a personal website. Any results or conclusions in the research presented on this website are my own and do not necessarily represent the view of the Federal Reserve System. 
 
@@ -24,6 +24,9 @@ This is a personal website. Any results or conclusions in the research presented
 
 Recent Working Papers
 ======
+
+- [**AI and Coder Employment: Compiling the Evidence**](https://www.federalreserve.gov/econres/feds/files/2026018pap.pdf) (joint with [Paul Soto](https://pesoto.github.io/)) *Working Paper, 2026*
+
 
 - [**LLM on a Budget: Active Knowledge Distillation for Efficient Classification of Large Text Corpora**](https://www.arxiv.org/abs/2511.11574) (joint with Viviana Luccioli, Rithika Iyengar, Ryan Panley, [Flora Haberkorn](https://www.federalreserve.gov/econres/flora-m-haberkorn.htm), Xiaoyu Ge, [Nitish Sinha](https://www.federalreserve.gov/econres/nitish-r-sinha.htm), and [Seung Jung Lee](https://sites.google.com/site/seunglee98))
 
