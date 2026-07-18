@@ -8,27 +8,26 @@
 <link rel="canonical" href="https://ldcrane.github.io/">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* Landing-page hero: full-bleed photograph that dissolves into the reading
-     surface, so the dense publication list never sits over the image. */
+  /* Landing-page hero: full-bleed photograph. The reading content starts
+     below it, so the dense publication list never sits over the image. */
   .hero {
     position: relative;
-    min-height: min(92vh, 880px);
+    /* tall enough that the towers AND the cloud bank at their base both fit;
+       the photo is 3:4 portrait, so a short hero would crop one of them off */
+    min-height: min(124vh, 1180px);
     display: flex;
     align-items: flex-start;
-    padding-top: clamp(3.5rem, 14vh, 9rem);
-    background: #c9d1d8 url("images/towers.jpg") no-repeat center 38% / cover;
+    padding-top: clamp(3rem, 11vh, 7rem);
+    /* anchored to the bottom: any crop eats the empty sky at the top,
+       never the clouds at the base */
+    background: #c9d1d8 url("images/towers.jpg") no-repeat center bottom / cover;
   }
-  /* lift contrast only in the top band where the text sits */
+  /* a light touch only in the top band where the text sits — the photo
+     itself is left alone everywhere else */
   .hero::before {
-    content: ""; position: absolute; inset: 0;
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 34%;
     background: linear-gradient(to bottom,
-      rgba(246,248,250,0.78) 0%, rgba(246,248,250,0.34) 20%, rgba(246,248,250,0) 40%);
-    pointer-events: none;
-  }
-  /* dissolve the bottom edge into the page background */
-  .hero::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 26%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--page) 92%);
+      rgba(247,249,250,0.70) 0%, rgba(247,249,250,0.26) 42%, rgba(247,249,250,0) 100%);
     pointer-events: none;
   }
   .hero-inner { position: relative; z-index: 1; width: 100%; }
@@ -45,12 +44,14 @@
     color: #2c343b; text-shadow: 0 1px 0 rgba(255,255,255,0.45);
   }
   @media (prefers-color-scheme: dark) {
+    /* the photo stays light in dark mode — only the top band is veiled,
+       just enough to carry the type */
     .hero::before {
       background: linear-gradient(to bottom,
-        rgba(8,10,12,0.72) 0%, rgba(8,10,12,0.42) 40%, rgba(8,10,12,0.15) 70%);
+        rgba(10,13,16,0.58) 0%, rgba(10,13,16,0.20) 45%, rgba(10,13,16,0) 100%);
     }
-    .hero h1 { color: #f4f2ec; text-shadow: 0 1px 6px rgba(0,0,0,0.55); }
-    .hero .role { color: #d3d0c8; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+    .hero h1 { color: #f7f5ef; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+    .hero .role { color: #e2dfd7; text-shadow: 0 1px 6px rgba(0,0,0,0.55); }
   }
   /* the nav sits directly under the dissolve — no extra top rule needed */
   .hero + .wrap nav.site { border-top: 0; margin-top: 0; }
