@@ -63,6 +63,12 @@
     return Math.round(thousands).toLocaleString() + "K jobs";
   }
 
+  function fmtPct(p) {
+    var s = p.toFixed(1);
+    if (s === "0.0") s = p.toFixed(2);   // keep tiny shares from reading as 0.0%
+    return s + "% of total nonfarm";
+  }
+
   var SVGNS = "http://www.w3.org/2000/svg";
   function el(name, attrs) {
     var e = document.createElementNS(SVGNS, name);
@@ -240,7 +246,9 @@
     elPath.textContent = atom.path.join("  ›  ");
     var codeTxt = "CES " + atom.ces;
     if (atom.naics && atom.naics !== "-") codeTxt += "  ·  NAICS " + atom.naics;
-    elCode.textContent = codeTxt + "  ·  " + fmtJobs(atom.latest_thousands);
+    var pct = 100 * atom.latest_thousands / DATA.total.latest_thousands;
+    elCode.textContent = codeTxt + "  ·  " + fmtJobs(atom.latest_thousands) +
+      ", " + fmtPct(pct);
     var hk = HAIKUS[atom.ces];
     if (hk) {
       elHaiku.hidden = false;
