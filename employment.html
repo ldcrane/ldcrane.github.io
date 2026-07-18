@@ -64,12 +64,15 @@
   .legend .swatch { width: 16px; height: 3px; border-radius: 2px; display: inline-block; }
 
   #haiku {
-    font-family: var(--serif); font-style: italic; font-size: 1.02rem;
-    line-height: 1.5; color: var(--ink-2); margin: 1.3rem 0 0;
-    padding: 0.9rem 0 0.2rem 1rem; border-left: 2px solid var(--rule);
-    display: flex; flex-direction: column;
+    display: flex; flex-direction: column; align-items: center;
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.15rem; line-height: 1.85; color: var(--ink);
+    text-align: center; text-wrap: balance;
+    margin: 1.9rem 0 0.7rem;
   }
+  #haiku span { display: block; }
   #haiku[hidden] { display: none; }
+  @media (max-width: 520px) { #haiku { font-size: 1.05rem; line-height: 1.7; } }
 
   .clock-foot {
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 1rem;
