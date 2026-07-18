@@ -1,4 +1,4 @@
-/* Employment clock — a different indexed CES employment "atom" each minute,
+/* Industry of the minute — a different indexed CES employment "atom" each minute,
    drawn against indexed total nonfarm (2019 = 100). Pure static JS.
 
    The display order is a single fixed, deterministic shuffle of the atoms
