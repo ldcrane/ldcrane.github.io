@@ -1,10 +1,15 @@
-/* Employment clock — a different indexed CES employment "atom" each hour,
-   drawn against indexed total nonfarm (2019 = 100). Pure static JS. */
+/* Employment clock — a different indexed CES employment "atom" each minute,
+   drawn against indexed total nonfarm (2019 = 100). Pure static JS.
+
+   The display order is a single fixed, deterministic shuffle of the atoms
+   (ORDER). Every visitor sees the same series at the same wall-clock minute;
+   "show next"/"show previous" step through that same order. */
 
 (function () {
   "use strict";
 
-  var MS_PER_HOUR = 3600000;
+  var MS_PER_MIN = 60000;
+  var SEED = 20260718;           // fixed -> the order never changes
   var elChart = document.getElementById("chart");
   var elTitle = document.getElementById("atom-title");
   var elPath = document.getElementById("atom-path");
@@ -12,11 +17,11 @@
   var elHaiku = document.getElementById("haiku");
   var elMeta = document.getElementById("chart-meta");
   var elCountdown = document.getElementById("countdown");
-  var elAnother = document.getElementById("another");
 
-  var DATA = null, HAIKUS = {}, STATE = { override: null };
+  // pos === null  -> follow the clock (live); otherwise a fixed slot in ORDER
+  var DATA = null, HAIKUS = {}, ORDER = [], STATE = { pos: null };
 
-  // deterministic PRNG (mulberry32) for the per-cycle shuffle
+  // deterministic PRNG (mulberry32)
   function mulberry32(a) {
     return function () {
       a |= 0; a = (a + 0x6D2B79F5) | 0;
@@ -37,13 +42,12 @@
     return idx;
   }
 
-  function currentHour() { return Math.floor(Date.now() / MS_PER_HOUR); }
-
-  // which atom index the current hour maps to (every atom once per n-hour cycle)
-  function atomForHour(hour, n) {
-    var cycle = Math.floor(hour / n);
-    var pos = ((hour % n) + n) % n;
-    return shuffledOrder(n, cycle)[pos];
+  // slot in ORDER for the current wall-clock minute
+  function liveSlot() {
+    return Math.floor(Date.now() / MS_PER_MIN) % ORDER.length;
+  }
+  function currentSlot() {
+    return STATE.pos == null ? liveSlot() : STATE.pos;
   }
 
   function ym(str) { // "YYYY-MM" -> absolute month index
@@ -258,45 +262,67 @@
   }
 
   function currentAtom() {
-    if (STATE.override != null) return DATA.atoms[STATE.override];
-    return DATA.atoms[atomForHour(currentHour(), DATA.atoms.length)];
+    return DATA.atoms[ORDER[currentSlot()]];
+  }
+
+  var elPrev, elNext, elReset, elEyebrow;
+
+  // reflect nav state in the controls + eyebrow + countdown
+  function syncControls() {
+    var navigating = STATE.pos != null;
+    elPrev.hidden = !navigating;
+    elReset.hidden = !navigating;
+    elEyebrow.textContent = navigating ? "Browsing" : "This minute's industry";
   }
 
   function tickCountdown() {
-    if (STATE.override != null) { elCountdown.textContent = ""; return; }
-    var ms = MS_PER_HOUR - (Date.now() % MS_PER_HOUR);
-    var mm = Math.floor(ms / 60000), ss = Math.floor((ms % 60000) / 1000);
-    elCountdown.textContent = "next industry in " + mm + "m " + (ss < 10 ? "0" : "") + ss + "s";
+    if (STATE.pos != null) { elCountdown.textContent = ""; return; }
+    var ss = Math.ceil((MS_PER_MIN - (Date.now() % MS_PER_MIN)) / 1000);
+    elCountdown.textContent = "next series in " + ss + "s";
   }
 
-  var lastHour = null;
+  function goTo(pos) {
+    STATE.pos = ((pos % ORDER.length) + ORDER.length) % ORDER.length;
+    show(currentAtom());
+    syncControls();
+    tickCountdown();
+  }
+  function goLive() {
+    STATE.pos = null;
+    lastSlot = liveSlot();
+    show(currentAtom());
+    syncControls();
+    tickCountdown();
+  }
+
+  var lastSlot = null;
   function poll() {
-    if (STATE.override == null) {
-      var h = currentHour();
-      if (h !== lastHour) { lastHour = h; show(currentAtom()); }
+    if (STATE.pos == null) {
+      var s = liveSlot();
+      if (s !== lastSlot) { lastSlot = s; show(currentAtom()); }
     }
     tickCountdown();
   }
 
   function init() {
-    elAnother.addEventListener("click", function (e) {
-      e.preventDefault();
-      var idx;
-      do { idx = Math.floor(Math.random() * DATA.atoms.length); }
-      while (DATA.atoms.length > 1 && idx === STATE.override);
-      STATE.override = idx;
-      show(DATA.atoms[idx]);
-      elCountdown.textContent = "";
-      elReset.hidden = false;
-    });
-    var elReset = document.getElementById("reset");
-    elReset.addEventListener("click", function (e) {
-      e.preventDefault();
-      STATE.override = null; elReset.hidden = true;
-      lastHour = currentHour(); show(currentAtom()); tickCountdown();
-    });
-    lastHour = currentHour();
+    elPrev = document.getElementById("prev");
+    elNext = document.getElementById("next");
+    elReset = document.getElementById("reset");
+    elEyebrow = document.getElementById("eyebrow");
+    elNext.addEventListener("click", function (e) { e.preventDefault(); goTo(currentSlot() + 1); });
+    elPrev.addEventListener("click", function (e) { e.preventDefault(); goTo(currentSlot() - 1); });
+    elReset.addEventListener("click", function (e) { e.preventDefault(); goLive(); });
+
+    // deep link: employment.html?ces=CODE opens that series in browse mode
+    var want = new URLSearchParams(location.search).get("ces");
+    if (want) {
+      var ai = DATA.atoms.findIndex(function (a) { return a.ces === want; });
+      if (ai >= 0) STATE.pos = ORDER.indexOf(ai);
+    }
+
+    lastSlot = liveSlot();
     show(currentAtom());
+    syncControls();
     tickCountdown();
     setInterval(poll, 1000);
     window.addEventListener("resize", function () { show(currentAtom()); });
@@ -307,6 +333,7 @@
     fetch("data/haikus.json").then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
   ]).then(function (res) {
     DATA = res[0]; HAIKUS = res[1] || {};
+    ORDER = shuffledOrder(DATA.atoms.length, SEED);
     init();
   }).catch(function (err) {
     elChart.innerHTML = "<p style='color:var(--muted)'>Couldn't load the employment data.</p>";

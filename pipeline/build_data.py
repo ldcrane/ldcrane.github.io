@@ -344,6 +344,32 @@ def main():
             "values": vals,
         })
 
+    # induced hierarchy (atoms + all their ancestors) for the browse/tree view
+    atom_index = {o["ces"]: i for i, o in enumerate(atom_objs)}
+    nodes = set()
+    for a in atoms:
+        c = a
+        nodes.add(c)
+        while c in parent:
+            c = parent[c]
+            nodes.add(c)
+    tree_kids = defaultdict(list)
+    for c in nodes:
+        if c in parent and parent[c] in nodes:
+            tree_kids[parent[c]].append(c)
+
+    def tree_node(c):
+        r = info[c]
+        o = {"code": c, "title": r["name"]}
+        if r["naics"] and r["naics"] != "-":
+            o["naics"] = r["naics"]
+        if c in atom_index:
+            o["atom"] = atom_index[c]
+        else:
+            o["children"] = [tree_node(x) for x in
+                             sorted(tree_kids[c], key=lambda x: info[x]["sort"])]
+        return o
+
     t_start, t_vals = index_series(series[ROOT])
     out = {
         "meta": {
@@ -356,6 +382,7 @@ def main():
         "total": {"ces": ROOT, "title": info[ROOT]["name"], "start": t_start,
                   "latest_thousands": series[ROOT][latest], "values": t_vals},
         "atoms": atom_objs,
+        "tree": tree_node(ROOT),
     }
     with open(out_path, "w") as f:
         json.dump(out, f, separators=(",", ":"))

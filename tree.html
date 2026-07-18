@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse all series — Leland D. Crane</title>
+<meta name="description" content="The full CES employment hierarchy — every industry with its NAICS code and title. Pick one to see its indexed time series.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .tree-intro { color: var(--ink-2); font-size: 1.02rem; margin: 0 0 1.4rem; max-width: 42rem; }
+
+  .searchbar { position: relative; margin: 0 0 1.4rem; }
+  .searchbar input {
+    width: 100%; font: inherit; font-size: 0.98rem; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 0.6rem 0.9rem; -webkit-appearance: none;
+  }
+  .searchbar input:focus { outline: none; border-color: var(--accent); }
+  .searchbar input::placeholder { color: var(--muted); }
+  .count { font-size: 0.82rem; color: var(--muted); margin: 0 0 1rem; }
+
+  .tree { list-style: none; margin: 0; padding: 0; }
+  .tree ul { list-style: none; margin: 0; padding: 0 0 0 1.15rem; border-left: 1px solid var(--rule); margin-left: 0.35rem; }
+  .node { padding: 0; }
+
+  .row {
+    display: flex; align-items: baseline; gap: 0.5rem;
+    padding: 0.28rem 0.35rem; border-radius: 7px; text-decoration: none;
+    scroll-margin-top: 1rem;
+  }
+  .row .tw { width: 1rem; flex: none; color: var(--muted); font-size: 0.8rem; user-select: none; }
+  .row .name { color: var(--ink); }
+  .row .code { margin-left: auto; padding-left: 0.8rem; font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* internal (group) nodes toggle open/closed */
+  .group > .row { cursor: pointer; }
+  .group > .row:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+  .group > .row .name { font-weight: 600; }
+  .group > ul { display: none; }
+  .group.open > ul { display: block; }
+  .group.open > .row .tw { transform: none; }
+
+  /* leaf (atom) rows are links to the chart */
+  a.leaf .name { color: var(--accent-ink); }
+  a.leaf:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+  a.leaf:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+  a.leaf .tw::before { content: "•"; }
+
+  .hidden { display: none !important; }
+  mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+  .empty { color: var(--muted); font-size: 0.9rem; padding: 1rem 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>Leland D. Crane</h1>
+    <p class="role">Principal economist at the Federal Reserve Board.</p>
+  </header>
+
+  <nav class="site">
+    <a href="index.html">Research</a>
+    <a href="files/crane-CV.pdf">CV</a>
+    <span class="spacer"></span>
+    <a href="employment.html">Employment clock</a>
+  </nav>
+
+  <main>
+    <h2 class="section" style="margin-top:1.6rem">Browse all series</h2>
+    <p class="tree-intro">The full CES employment hierarchy. Bold rows are aggregates you can expand; the leaves &mdash; the finest series that partition total nonfarm &mdash; link to their indexed time series. Codes and titles come straight from the BLS files.</p>
+
+    <div class="searchbar">
+      <input id="search" type="search" placeholder="Search industries or NAICS codes…" autocomplete="off" spellcheck="false">
+    </div>
+    <p class="count" id="count"></p>
+
+    <ul class="tree" id="tree"></ul>
+    <p class="empty hidden" id="empty">No industries match that search.</p>
+  </main>
+
+  <footer>
+    <span>Leland D. Crane</span>
+    <span class="spacer"></span>
+    <a href="employment.html">Employment clock</a>
+    <a href="index.html">Research</a>
+  </footer>
+
+</div>
+<script src="tree.js"></script>
+</body>
+</html>

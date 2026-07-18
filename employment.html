@@ -78,7 +78,9 @@
   }
   #chart-meta { flex: 1; min-width: 14rem; }
   #countdown { font-variant-numeric: tabular-nums; }
-  .clock-foot a { color: var(--ink-2); cursor: pointer; }
+  .controls { display: inline-flex; gap: 0.9rem; align-items: baseline; flex-wrap: wrap; }
+  .clock-foot a { color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+  .clock-foot a:hover { color: var(--accent-ink); }
   .note { color: var(--muted); font-size: 0.85rem; margin: 1.6rem 0 0; max-width: 40rem; }
 </style>
 </head>
@@ -98,10 +100,10 @@
   </nav>
 
   <main>
-    <p class="clock-intro">Every hour, this page shows a random U.S. payroll employment series &mdash; indexed to its 2019 average and drawn against the total.</p>
+    <p class="clock-intro">Every minute, this page shows a different U.S. payroll employment series &mdash; indexed to its 2019 average and drawn against the total.</p>
 
     <section class="card" aria-live="polite">
-      <p class="eyebrow">This hour's industry</p>
+      <p class="eyebrow" id="eyebrow">This minute's industry</p>
       <h2 id="atom-title">&nbsp;</h2>
       <p id="atom-path"></p>
       <p id="atom-code"></p>
@@ -121,8 +123,12 @@
       <div class="clock-foot">
         <span id="chart-meta"></span>
         <span id="countdown"></span>
-        <a id="another" role="button" tabindex="0">show another</a>
-        <a id="reset" role="button" tabindex="0" hidden>back to this hour</a>
+        <span class="controls">
+          <a id="prev" role="button" tabindex="0" hidden>‹ previous</a>
+          <a id="next" role="button" tabindex="0">next ›</a>
+          <a id="reset" role="button" tabindex="0" hidden>back to now</a>
+          <a href="tree.html">browse all ›</a>
+        </span>
       </div>
     </section>
 
