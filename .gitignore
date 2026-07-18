@@ -1,2 +1,4 @@
 _site/
-
+.claude/
+.DS_Store
+pipeline/haiku_inputs.json

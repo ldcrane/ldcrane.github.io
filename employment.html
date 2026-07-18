@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Employment clock — Leland D. Crane</title>
+<meta name="description" content="Every hour, a different finely-detailed slice of U.S. employment, indexed to 2019 and drawn against the total. Built from BLS Current Employment Statistics.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .clock-intro { color: var(--ink-2); font-size: 1.02rem; margin: 0 0 1.8rem; max-width: 40rem; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 1.5rem 1.5rem 1.3rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .eyebrow {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); font-weight: 600; margin: 0 0 0.5rem;
+  }
+  #atom-title {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.15;
+    letter-spacing: -0.01em; margin: 0 0 0.4rem;
+  }
+  #atom-path { font-size: 0.85rem; color: var(--muted); margin: 0 0 0.15rem; }
+  #atom-code { font-size: 0.82rem; color: var(--ink-2); font-variant-numeric: tabular-nums; margin: 0; }
+
+  .plot-wrap { position: relative; margin: 1.3rem 0 0.4rem; }
+  #chart { width: 100%; }
+  #chart svg { display: block; overflow: visible; }
+
+  /* chart tokens */
+  .card {
+    --series-1: #2a6fd0;
+    --ref-line: #a9a69d;
+    --grid: var(--rule);
+    --axis: #c9c6bd;
+    --ref: #b9938f;
+  }
+  @media (prefers-color-scheme: dark) {
+    .card { --series-1: #6ea8f0; --ref-line: #8a877e; --axis: #45443f; --ref: #c48f8a; }
+  }
+  .tick { fill: var(--muted); font: 11px var(--sans); font-variant-numeric: tabular-nums; }
+  .tick-ref { fill: var(--ref); font-weight: 600; }
+  .endlab { font: 600 12px var(--sans); font-variant-numeric: tabular-nums; }
+
+  #tip {
+    position: absolute; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12); padding: 0.5rem 0.65rem; z-index: 5;
+    font-size: 0.8rem; min-width: 9rem;
+  }
+  .tip-date { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; }
+  .tip-row { display: flex; align-items: center; gap: 0.45rem; margin: 0.12rem 0; }
+  .tip-key { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+  .tip-name { color: var(--ink-2); }
+  .tip-val { margin-left: auto; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .legend { display: flex; gap: 1.2rem; flex-wrap: wrap; margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--ink-2); }
+  .legend .k { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .legend .swatch { width: 16px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  #haiku {
+    font-family: var(--serif); font-style: italic; font-size: 1.02rem;
+    line-height: 1.5; color: var(--ink-2); margin: 1.3rem 0 0;
+    padding: 0.9rem 0 0.2rem 1rem; border-left: 2px solid var(--rule);
+    display: flex; flex-direction: column;
+  }
+  #haiku[hidden] { display: none; }
+
+  .clock-foot {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 1rem;
+    margin: 1.2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--rule);
+    font-size: 0.8rem; color: var(--muted);
+  }
+  #chart-meta { flex: 1; min-width: 14rem; }
+  #countdown { font-variant-numeric: tabular-nums; }
+  .clock-foot a { color: var(--ink-2); cursor: pointer; }
+  .note { color: var(--muted); font-size: 0.85rem; margin: 1.6rem 0 0; max-width: 40rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>Leland D. Crane</h1>
+    <p class="role">Principal economist at the Federal Reserve Board.</p>
+  </header>
+
+  <nav class="site">
+    <a href="index.html">Research</a>
+    <a href="files/crane-CV.pdf">CV</a>
+    <span class="spacer"></span>
+    <a href="employment.html" aria-current="page">Employment clock</a>
+  </nav>
+
+  <main>
+    <p class="clock-intro">Every hour, this page shows a random U.S. payroll employment series &mdash; indexed to its 2019 average and drawn against the total.</p>
+
+    <section class="card" aria-live="polite">
+      <p class="eyebrow">This hour's industry</p>
+      <h2 id="atom-title">&nbsp;</h2>
+      <p id="atom-path"></p>
+      <p id="atom-code"></p>
+
+      <div class="plot-wrap">
+        <div id="chart"></div>
+        <div id="tip"></div>
+      </div>
+
+      <div class="legend">
+        <span class="k"><span class="swatch" style="background:var(--series-1)"></span> This industry</span>
+        <span class="k"><span class="swatch" style="background:var(--ref-line)"></span> Total nonfarm</span>
+      </div>
+
+      <div id="haiku" hidden></div>
+
+      <div class="clock-foot">
+        <span id="chart-meta"></span>
+        <span id="countdown"></span>
+        <a id="another" role="button" tabindex="0">show another</a>
+        <a id="reset" role="button" tabindex="0" hidden>back to this hour</a>
+      </div>
+    </section>
+
+    <p class="note">Source: U.S. Bureau of Labor Statistics, Current Employment Statistics (seasonally adjusted all-employee series). An &ldquo;industry&rdquo; here is a leaf of the CES NAICS hierarchy chosen so that the leaves partition total nonfarm employment; NAICS codes and titles are carried straight from the BLS files. Indexing is to the 2019 calendar-year average.</p>
+  </main>
+
+  <footer>
+    <span>Leland D. Crane</span>
+    <span class="spacer"></span>
+    <a href="index.html">Research</a>
+    <a href="https://github.com/ldcrane">GitHub</a>
+  </footer>
+
+</div>
+<script src="employment.js"></script>
+</body>
+</html>
