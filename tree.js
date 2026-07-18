@@ -1,23 +1,28 @@
 /* Browse all series — the CES employment hierarchy drawn as a zoomable,
    pannable node-link tree. Leaves are sized by share of total nonfarm
-   employment and link to employment.html?ces=CODE. */
+   employment and link to employment.html?ces=CODE. A search box lists
+   partial matches in a dropdown; hovering a result locates it in the
+   tree, clicking opens its series. */
 
 (function () {
   "use strict";
 
   var SVGNS = "http://www.w3.org/2000/svg";
-  var DX = 172, DY = 24, R_MIN = 2.6, R_MAX = 21, PAD = 34;
+  var DX = 172, DY = 24, R_MIN = 2.6, R_MAX = 21, PAD = 34, MAX_RESULTS = 60;
 
   var canvas = document.getElementById("canvas");
   var svg = document.getElementById("svg");
   var vp = document.getElementById("vp");
   var tip = document.getElementById("tip");
   var elSearch = document.getElementById("search");
+  var elResults = document.getElementById("results");
   var elCount = document.getElementById("count");
 
   var view = { k: 1, tx: 0, ty: 0 };
-  var leafEls = [];        // {node, g, share, x, y}
-  var contentBox = null;   // {x, y, w, h} in world units
+  var leafEls = [];        // {node, g, share, title, code, hay}
+  var contentBox = null;
+  var maxShare = 0;
+  var matches = [], active = -1;
 
   function el(name, attrs) {
     var e = document.createElementNS(SVGNS, name);
@@ -30,10 +35,14 @@
   }
   function fmtPct(p) { var s = p.toFixed(1); return (s === "0.0" ? p.toFixed(2) : s) + "%"; }
   function apply() { vp.setAttribute("transform", "translate(" + view.tx + "," + view.ty + ") scale(" + view.k + ")"); }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
-  fetch("data/employment.json").then(function (r) { return r.json(); }).then(function (D) {
-    build(D);
-  }).catch(function (err) {
+  // layout helpers (node._depth and node._y are assigned in build)
+  function X(n) { return PAD + n._depth * DX; }
+  function Y(n) { return PAD + n._y * DY; }
+  function R(share) { return R_MIN + (R_MAX - R_MIN) * Math.sqrt(share / maxShare); }
+
+  fetch("data/employment.json").then(function (r) { return r.json(); }).then(build).catch(function (err) {
     canvas.innerHTML = "<p style='padding:1rem;color:var(--muted)'>Couldn't load the data.</p>";
     console.error(err);
   });
@@ -41,7 +50,6 @@
   function build(D) {
     var atoms = D.atoms, total = D.total.latest_thousands;
 
-    // 1. assign leaf order (DFS) and node coordinates
     var leaves = [];
     (function assign(node, depth) {
       node._depth = depth;
@@ -53,16 +61,12 @@
       }
     })(D.tree, 0);
 
-    var maxShare = 0;
     leaves.forEach(function (lf) {
       lf._share = 100 * atoms[lf.atom].latest_thousands / total;
       if (lf._share > maxShare) maxShare = lf._share;
     });
-    function X(n) { return PAD + n._depth * DX; }
-    function Y(n) { return PAD + n._y * DY; }
-    function R(share) { return R_MIN + (R_MAX - R_MIN) * Math.sqrt(share / maxShare); }
 
-    // 2. draw edges (under nodes)
+    // edges
     var edges = el("g");
     (function link(node) {
       if (node.atom != null) return;
@@ -76,7 +80,7 @@
     })(D.tree);
     vp.appendChild(edges);
 
-    // 3. draw nodes
+    // nodes
     (function draw(node) {
       var x = X(node), y = Y(node);
       if (node.atom != null) {
@@ -86,15 +90,14 @@
         var lab = el("text", { "class": "label leaf-label", x: x + r + 6, y: y + 4 });
         lab.textContent = node.title;
         g.appendChild(lab);
-        // generous transparent hit target over dot + label
         var hit = el("rect", { "class": "leaf-hit", x: x - r - 2, y: y - 9,
           width: r + 12 + node.title.length * 6.6, height: 18 });
         g.appendChild(hit);
-        var rec = { node: node, g: g, share: node._share,
+        var rec = { node: node, g: g, share: node._share, title: node.title, code: node.code,
+                    naics: a.naics, jobs: a.latest_thousands,
                     hay: (node.title + " " + node.code + " " + (a.naics || "")).toLowerCase() };
-        var go = function () { location.href = "employment.html?ces=" + encodeURIComponent(node.code); };
         [hit, lab].forEach(function (t) {
-          t.addEventListener("click", function () { if (!dragged) go(); });
+          t.addEventListener("click", function () { if (!dragged) openLeaf(node.code); });
           t.addEventListener("pointerenter", function (e) { showTip(e, node, a, true); });
           t.addEventListener("pointermove", moveTip);
           t.addEventListener("pointerleave", hideTip);
@@ -104,12 +107,10 @@
       } else {
         vp.appendChild(el("circle", { "class": "node-dot", cx: x, cy: y, r: node._depth === 0 ? 4 : 3 }));
         if (node._depth <= 2) {
-          var t = el("text", { "class": "label node-label",
-            x: x, y: y - 8, "text-anchor": "middle" });
+          var t = el("text", { "class": "label node-label", x: x, y: y - 8, "text-anchor": "middle" });
           t.textContent = node.title;
           vp.appendChild(t);
         }
-        // hover on internal dots too
         var hd = el("circle", { cx: x, cy: y, r: 9, fill: "transparent" });
         hd.addEventListener("pointerenter", function (e) { showTip(e, node, null, false); });
         hd.addEventListener("pointermove", moveTip);
@@ -119,19 +120,19 @@
       }
     })(D.tree);
 
-    // content bounds in world units
-    var maxDepth = 0, longest = 0;
+    var longest = 0;
     leaves.forEach(function (lf) {
-      if (lf._depth > maxDepth) maxDepth = lf._depth;
       longest = Math.max(longest, X(lf) + R(lf._share) + 6 + lf.title.length * 6.6);
     });
     contentBox = { x: 0, y: 0, w: longest + PAD, h: PAD * 2 + (leaves.length - 1) * DY };
 
     elCount.textContent = D.meta.n_atoms + " series · leaf size shows share of total nonfarm employment";
     wireInteractions();
-    fit();
-    window.addEventListener("resize", fit);
+    initialView();
+    window.addEventListener("resize", initialView);
   }
+
+  function openLeaf(code) { location.href = "employment.html?ces=" + encodeURIComponent(code); }
 
   // ---------- tooltip ----------
   function showTip(e, node, atom, isLeaf) {
@@ -158,15 +159,12 @@
   function hideTip() { tip.style.opacity = 0; }
 
   // ---------- zoom / pan ----------
-  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
-
   function zoomAround(cx, cy, factor) {
     var nk = clamp(view.k * factor, 0.15, 9);
     factor = nk / view.k;
     view.tx = cx - (cx - view.tx) * factor;
     view.ty = cy - (cy - view.ty) * factor;
-    view.k = nk;
-    apply();
+    view.k = nk; apply();
   }
   function fit() {
     if (!contentBox) return;
@@ -177,12 +175,26 @@
     view.ty = (h - contentBox.h * k) / 2 - contentBox.y * k;
     apply();
   }
-  function fitBox(box) {
-    var w = canvas.clientWidth, h = canvas.clientHeight, m = 40;
-    var k = clamp(Math.min((w - m * 2) / box.w, (h - m * 2) / box.h), 0.15, 4);
+  // default view: on a wide canvas, fill the width (readable) and let the
+  // taller-than-canvas tree scroll vertically; otherwise show the whole tree
+  function initialView() {
+    if (!contentBox) return;
+    var w = canvas.clientWidth, h = canvas.clientHeight, m = 24;
+    var kW = (w - m * 2) / contentBox.w;
+    if (w < 860 || kW * contentBox.h <= h - m * 2) { fit(); return; }
+    var k = clamp(kW, 0.15, 1.3);
     view.k = k;
-    view.tx = (w - box.w * k) / 2 - box.x * k;
-    view.ty = (h - box.h * k) / 2 - box.y * k;
+    view.tx = (w - contentBox.w * k) / 2 - contentBox.x * k;
+    view.ty = m;
+    apply();
+  }
+  // center a node in the view at a comfortably readable zoom
+  function locate(node) {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    var k = clamp(Math.max(view.k, 0.95), 0.15, 4);
+    view.k = k;
+    view.tx = w * 0.32 - X(node) * k;
+    view.ty = h / 2 - Y(node) * k;
     apply();
   }
 
@@ -194,13 +206,11 @@
       zoomAround(e.clientX - b.left, e.clientY - b.top, Math.exp(-e.deltaY * 0.0016));
     }, { passive: false });
 
-    // pan via window-level listeners (no pointer capture, so leaf clicks still fire)
     var down = null;
     svg.addEventListener("pointerdown", function (e) {
       if (e.button !== 0) return;
       down = { x: e.clientX, y: e.clientY, tx: view.tx, ty: view.ty };
-      dragged = false;
-      canvas.classList.add("grabbing");
+      dragged = false; canvas.classList.add("grabbing");
     });
     window.addEventListener("pointermove", function (e) {
       if (!down) return;
@@ -208,40 +218,90 @@
       if (Math.abs(dx) + Math.abs(dy) > 4) dragged = true;
       view.tx = down.tx + dx; view.ty = down.ty + dy; apply();
     });
-    window.addEventListener("pointerup", function () {
-      down = null; canvas.classList.remove("grabbing");
-    });
+    window.addEventListener("pointerup", function () { down = null; canvas.classList.remove("grabbing"); });
 
     document.getElementById("zin").addEventListener("click", function () { center(1.4); });
     document.getElementById("zout").addEventListener("click", function () { center(1 / 1.4); });
-    document.getElementById("zfit").addEventListener("click", function () { elSearch.value = ""; runSearch(""); fit(); });
+    document.getElementById("zfit").addEventListener("click", function () { clearSearch(); fit(); });
     function center(f) { zoomAround(canvas.clientWidth / 2, canvas.clientHeight / 2, f); }
 
     elSearch.addEventListener("input", function () { runSearch(elSearch.value); });
+    elSearch.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", function (e) {
+      if (!e.target.closest(".searchbar")) hideResults();
+    });
+    elSearch.addEventListener("focus", function () { if (matches.length) elResults.hidden = false; });
   }
 
-  // ---------- search: highlight matches, dim the rest, zoom to fit ----------
-  function runSearch(q) {
-    q = q.trim().toLowerCase();
-    var matches = [];
-    leafEls.forEach(function (rec) {
-      var hit = q && rec.hay.indexOf(q) >= 0;
-      rec.g.classList.toggle("hot", !!hit);
-      rec.g.classList.toggle("faded", !!q && !hit);
-      if (hit) matches.push(rec);
+  // ---------- search: dropdown of partial matches + tree highlight ----------
+  function highlight(txt, q) {
+    var i = txt.toLowerCase().indexOf(q), frag = document.createDocumentFragment();
+    if (i < 0) { frag.appendChild(document.createTextNode(txt)); return frag; }
+    frag.appendChild(document.createTextNode(txt.slice(0, i)));
+    var m = document.createElement("mark"); m.textContent = txt.slice(i, i + q.length); frag.appendChild(m);
+    frag.appendChild(document.createTextNode(txt.slice(i + q.length)));
+    return frag;
+  }
+
+  function runSearch(raw) {
+    var q = raw.trim().toLowerCase();
+    matches = q ? leafEls.filter(function (r) { return r.hay.indexOf(q) >= 0; }) : [];
+    active = -1;
+
+    // tree highlight
+    leafEls.forEach(function (r) {
+      r.g.classList.toggle("hot", q && r.hay.indexOf(q) >= 0);
+      r.g.classList.toggle("faded", !!q && r.hay.indexOf(q) < 0);
     });
     vp.querySelectorAll(".link, .node-dot, .node-label").forEach(function (n) {
       n.classList.toggle("faded", !!q);
     });
-    if (matches.length) {
-      var xs = matches.map(function (m) { return X(m.node); });
-      var ys = matches.map(function (m) { return Y(m.node); });
-      var box = { x: Math.min.apply(null, xs) - 30, y: Math.min.apply(null, ys) - 30,
-        w: (Math.max.apply(null, xs) - Math.min.apply(null, xs)) + 260,
-        h: (Math.max.apply(null, ys) - Math.min.apply(null, ys)) + 60 };
-      fitBox(box);
+
+    // dropdown
+    elResults.innerHTML = "";
+    if (!q) { hideResults(); return; }
+    if (!matches.length) {
+      var none = document.createElement("li"); none.className = "r-none"; none.textContent = "No matches";
+      elResults.appendChild(none);
+    } else {
+      matches.slice(0, MAX_RESULTS).forEach(function (r, idx) {
+        var li = document.createElement("li"); li.setAttribute("role", "option"); li.dataset.idx = idx;
+        var nm = document.createElement("span"); nm.className = "r-name"; nm.appendChild(highlight(r.title, q));
+        var mt = document.createElement("span"); mt.className = "r-meta"; mt.textContent = fmtPct(r.share);
+        li.appendChild(nm); li.appendChild(mt);
+        li.addEventListener("pointerenter", function () { setActive(idx, false); locate(r.node); });
+        li.addEventListener("click", function () { openLeaf(r.code); });
+        elResults.appendChild(li);
+      });
+      if (matches.length > MAX_RESULTS) {
+        var more = document.createElement("li"); more.className = "r-more";
+        more.textContent = "+" + (matches.length - MAX_RESULTS) + " more — keep typing to narrow";
+        elResults.appendChild(more);
+      }
     }
-    function X(n) { return PAD + n._depth * DX; }
-    function Y(n) { return PAD + n._y * DY; }
+    elResults.hidden = false;
+    elSearch.setAttribute("aria-expanded", "true");
+  }
+
+  function setActive(idx, scroll) {
+    active = idx;
+    var items = elResults.querySelectorAll("li[role=option]");
+    items.forEach(function (li, i) { li.classList.toggle("active", i === idx); });
+    if (scroll && items[idx]) items[idx].scrollIntoView({ block: "nearest" });
+  }
+
+  function onKey(e) {
+    var n = Math.min(matches.length, MAX_RESULTS);
+    if (e.key === "ArrowDown" && n) { e.preventDefault(); setActive((active + 1) % n, true); locate(matches[active].node); }
+    else if (e.key === "ArrowUp" && n) { e.preventDefault(); setActive((active - 1 + n) % n, true); locate(matches[active].node); }
+    else if (e.key === "Enter" && n) { e.preventDefault(); openLeaf(matches[active >= 0 ? active : 0].code); }
+    else if (e.key === "Escape") { clearSearch(); elSearch.blur(); }
+  }
+
+  function hideResults() { elResults.hidden = true; elSearch.setAttribute("aria-expanded", "false"); }
+  function clearSearch() {
+    elSearch.value = ""; matches = []; active = -1; elResults.innerHTML = ""; hideResults();
+    leafEls.forEach(function (r) { r.g.classList.remove("hot", "faded"); });
+    vp.querySelectorAll(".faded").forEach(function (n) { n.classList.remove("faded"); });
   }
 })();

@@ -9,7 +9,10 @@
 <style>
   .tree-intro { color: var(--ink-2); font-size: 1.02rem; margin: 0 0 1.2rem; max-width: 42rem; }
 
-  .searchbar { position: relative; margin: 0 0 1rem; }
+  /* the tree and its controls break out of the narrow text column on wide screens */
+  .tree-wide { width: min(1440px, 94vw); margin-left: 50%; transform: translateX(-50%); }
+
+  .searchbar { position: relative; margin: 0 0 1rem; max-width: 34rem; }
   .searchbar input {
     width: 100%; font: inherit; font-size: 0.98rem; color: var(--ink);
     background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
@@ -17,6 +20,23 @@
   }
   .searchbar input:focus { outline: none; border-color: var(--accent); }
   .searchbar input::placeholder { color: var(--muted); }
+
+  .results {
+    position: absolute; top: calc(100% + 5px); left: 0; right: 0; z-index: 20;
+    margin: 0; padding: 4px; list-style: none;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.16); max-height: 340px; overflow-y: auto;
+  }
+  .results li {
+    display: flex; align-items: baseline; gap: 0.7rem;
+    padding: 0.4rem 0.6rem; border-radius: 7px; cursor: pointer;
+  }
+  .results li:hover, .results li.active { background: color-mix(in srgb, var(--accent) 11%, transparent); }
+  .results .r-name { color: var(--ink); font-size: 0.92rem; line-height: 1.25; }
+  .results .r-meta { margin-left: auto; color: var(--muted); font-size: 0.76rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .results .r-none { color: var(--muted); font-size: 0.88rem; padding: 0.5rem 0.6rem; cursor: default; }
+  .results .r-more { color: var(--muted); font-size: 0.76rem; padding: 0.35rem 0.6rem; cursor: default; }
+  .results mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
 
   /* chart-consistent tokens */
   .canvas {
@@ -90,21 +110,24 @@
     <h2 class="section" style="margin-top:1.6rem">Browse all series</h2>
     <p class="tree-intro">The CES employment hierarchy as a tree. Every leaf is one of the finest series that partition total nonfarm; each leaf is sized by its share of total employment. Scroll to zoom, drag to pan, and click a leaf to open its indexed time series.</p>
 
-    <div class="searchbar">
-      <input id="search" type="search" placeholder="Search industries or NAICS codes…" autocomplete="off" spellcheck="false">
-    </div>
-
-    <div class="canvas" id="canvas">
-      <div class="zoomctl">
-        <button id="zout" title="Zoom out" aria-label="Zoom out">−</button>
-        <button id="zin" title="Zoom in" aria-label="Zoom in">+</button>
-        <button id="zfit" title="Fit to view">fit</button>
+    <div class="tree-wide">
+      <div class="searchbar">
+        <input id="search" type="search" placeholder="Search industries or NAICS codes…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="results">
+        <ul class="results" id="results" role="listbox" hidden></ul>
       </div>
-      <svg id="svg"><g id="vp"></g></svg>
-      <div id="tip"></div>
-      <p class="hint">scroll to zoom · drag to pan · click a leaf</p>
+
+      <div class="canvas" id="canvas">
+        <div class="zoomctl">
+          <button id="zout" title="Zoom out" aria-label="Zoom out">−</button>
+          <button id="zin" title="Zoom in" aria-label="Zoom in">+</button>
+          <button id="zfit" title="Fit to view">fit</button>
+        </div>
+        <svg id="svg"><g id="vp"></g></svg>
+        <div id="tip"></div>
+        <p class="hint">scroll to zoom · drag to pan · click a leaf</p>
+      </div>
+      <p class="count" id="count"></p>
     </div>
-    <p class="count" id="count"></p>
   </main>
 
   <footer>
