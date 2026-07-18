@@ -1,4 +1,6 @@
 _site/
 .claude/
 .DS_Store
+.cache/
 pipeline/haiku_inputs.json
+data/haikus.json.bak
