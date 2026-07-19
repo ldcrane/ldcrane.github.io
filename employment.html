@@ -82,6 +82,11 @@
   #chart-meta { flex: 1; min-width: 14rem; }
   #countdown { font-variant-numeric: tabular-nums; }
   .controls { display: inline-flex; gap: 0.9rem; align-items: baseline; flex-wrap: wrap; }
+  /* "previous" sits to the left of "next" and only appears while browsing.
+     Reserve its slot at all times so clicking "next" doesn't shift the button
+     out from under the pointer. ("back to now" is to next's right, so it can
+     hide normally without moving next.) */
+  #prev[hidden] { display: inline-block; visibility: hidden; }
   .clock-foot a { color: var(--ink-2); cursor: pointer; white-space: nowrap; }
   .clock-foot a:hover { color: var(--accent-ink); }
   .note { color: var(--muted); font-size: 0.85rem; margin: 1.6rem 0 0; max-width: 40rem; }
