@@ -36,11 +36,15 @@
   }
   .hero__nav {
     position: absolute; left: 0; right: 0; bottom: clamp(0.7rem, 3%, 1.8rem);
-    z-index: 1; margin: 0; border: 0;
-    padding: 0 clamp(1.3rem, 5vw, 2.4rem);
+    z-index: 1;
   }
-  .hero__nav a { color: #1b2126; text-shadow: 0 1px 4px rgba(255,255,255,0.7); }
-  .hero__nav a:hover, .hero__nav a[aria-current="page"] { color: #000; border-bottom-color: var(--accent); }
+  /* styles.css's plain "nav.site" (border-top/bottom + muted ink-2 link
+     color — a hairline that reads as an ugly rule over a photo, and a gray
+     that reads as faded against bright cloud) beats a bare ".hero__nav" on
+     specificity. "nav.hero__nav.site" is more specific and wins instead. */
+  nav.hero__nav.site { border: 0; margin: 0; padding: 0 clamp(1.3rem, 5vw, 2.4rem); }
+  nav.hero__nav.site a { color: #1b2126; text-shadow: 0 1px 4px rgba(255,255,255,0.7); }
+  nav.hero__nav.site a:hover, nav.hero__nav.site a[aria-current="page"] { color: #000; border-bottom-color: var(--accent); }
 </style>
 </head>
 <body>
