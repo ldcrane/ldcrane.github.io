@@ -8,72 +8,60 @@
 <link rel="canonical" href="https://ldcrane.github.io/">
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* Landing-page hero: full-bleed photograph. The reading content starts
-     below it, so the dense publication list never sits over the image. */
-  .hero {
-    position: relative;
-    /* tall enough that the towers AND the cloud bank at their base both fit;
-       the photo is 3:4 portrait, so a short hero would crop one of them off */
-    min-height: min(124vh, 1180px);
-    display: flex;
-    align-items: flex-start;
-    padding-top: clamp(3rem, 11vh, 7rem);
-    /* anchored to the bottom: any crop eats the empty sky at the top,
-       never the clouds at the base */
-    background: #c9d1d8 url("images/towers.jpg") no-repeat center bottom / cover;
+  /* Landing-page hero: the whole portrait photo, shown top-to-bottom, with the
+     name over the upper cloud and the nav over the lower cloud band. The image
+     is capped in width and centred, so on wide screens it never crops the
+     clouds off (a full-bleed cover crop would). */
+  .hero { background: var(--page); display: flex; justify-content: center; }
+  .hero__frame { position: relative; width: 100%; max-width: 820px; }
+  .hero__img { display: block; width: 100%; height: auto; }
+
+  /* text sits over the bright cloud bands, so it stays dark ink in both themes
+     with a soft light halo for legibility */
+  .hero__name {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 1;
+    padding: clamp(1.3rem, 5vw, 2.8rem) clamp(1.3rem, 5vw, 2.4rem) 0;
   }
-  /* a light touch only in the top band where the text sits — the photo
-     itself is left alone everywhere else */
-  .hero::before {
-    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 34%;
-    background: linear-gradient(to bottom,
-      rgba(247,249,250,0.70) 0%, rgba(247,249,250,0.26) 42%, rgba(247,249,250,0) 100%);
-    pointer-events: none;
-  }
-  .hero-inner { position: relative; z-index: 1; width: 100%; }
-  .hero h1 {
+  .hero__name h1 {
     font-family: var(--serif); font-weight: 600;
-    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    font-size: clamp(2rem, 6.5vw, 3rem);
     letter-spacing: -0.018em; line-height: 1.05;
-    margin: 0 0 0.5rem; color: #14181c;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    margin: 0 0 0.4rem; color: #14181c;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.7);
   }
-  .hero .role {
-    margin: 0; max-width: 33rem;
-    font-size: clamp(1rem, 2.2vw, 1.12rem); line-height: 1.55;
-    color: #2c343b; text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+  .hero__name .role {
+    margin: 0; max-width: 30rem;
+    font-size: clamp(0.92rem, 2.4vw, 1.08rem); line-height: 1.5;
+    color: #23292e; text-shadow: 0 1px 4px rgba(255,255,255,0.65);
   }
-  @media (prefers-color-scheme: dark) {
-    /* the photo stays light in dark mode — only the top band is veiled,
-       just enough to carry the type */
-    .hero::before {
-      background: linear-gradient(to bottom,
-        rgba(10,13,16,0.58) 0%, rgba(10,13,16,0.20) 45%, rgba(10,13,16,0) 100%);
-    }
-    .hero h1 { color: #f7f5ef; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
-    .hero .role { color: #e2dfd7; text-shadow: 0 1px 6px rgba(0,0,0,0.55); }
+  .hero__nav {
+    position: absolute; left: 0; right: 0; bottom: clamp(0.7rem, 3%, 1.8rem);
+    z-index: 1; margin: 0; border: 0;
+    padding: 0 clamp(1.3rem, 5vw, 2.4rem);
   }
-  /* the nav sits directly under the dissolve — no extra top rule needed */
-  .hero + .wrap nav.site { border-top: 0; margin-top: 0; }
+  .hero__nav a { color: #1b2126; text-shadow: 0 1px 4px rgba(255,255,255,0.7); }
+  .hero__nav a:hover, .hero__nav a[aria-current="page"] { color: #000; border-bottom-color: var(--accent); }
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <div class="wrap hero-inner">
-    <h1>Leland D. Crane</h1>
-    <p class="role">Principal economist at the Federal Reserve Board, working on labor markets, AI, and economic measurement.</p>
+  <div class="hero__frame">
+    <img class="hero__img" src="images/towers.jpg" alt="Skyscrapers rising into low cloud">
+    <div class="hero__name">
+      <h1>Leland D. Crane</h1>
+      <p class="role">Principal economist at the Federal Reserve Board, working on labor markets, AI, and economic measurement.</p>
+    </div>
+    <nav class="site hero__nav">
+      <a href="index.html" aria-current="page">Research</a>
+      <a href="files/crane-CV.pdf">CV</a>
+      <span class="spacer"></span>
+      <a href="employment.html">Industry of the minute</a>
+    </nav>
   </div>
 </header>
 
 <div class="wrap">
-
-  <nav class="site">
-    <a href="index.html" aria-current="page">Research</a>
-    <a href="files/crane-CV.pdf">CV</a>
-    <span class="spacer"></span>
-    <a href="employment.html">Industry of the minute</a>
-  </nav>
 
   <main>
     <p class="lede">I study the labor market and the macroeconomy using nontraditional data — payroll microdata, text, and large language models — with a long-running interest in search and matching.</p>

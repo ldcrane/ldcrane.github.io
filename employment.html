@@ -80,13 +80,17 @@
     font-size: 0.8rem; color: var(--muted);
   }
   #chart-meta { flex: 1; min-width: 14rem; }
-  #countdown { font-variant-numeric: tabular-nums; }
-  .controls { display: inline-flex; gap: 0.9rem; align-items: baseline; flex-wrap: wrap; }
-  /* "previous" sits to the left of "next" and only appears while browsing.
-     Reserve its slot at all times so clicking "next" doesn't shift the button
-     out from under the pointer. ("back to now" is to next's right, so it can
-     hide normally without moving next.) */
-  #prev[hidden] { display: inline-block; visibility: hidden; }
+  /* reserve the countdown's width so emptying it in browse mode doesn't reflow
+     the whole footer (which is what was moving "next") */
+  #countdown { font-variant-numeric: tabular-nums; display: inline-block; min-width: 8.5rem; }
+  .controls { display: inline-flex; gap: 1.5rem; align-items: baseline; flex-wrap: wrap; }
+  .ctl-group { display: inline-flex; gap: 0.9rem; align-items: baseline; }
+  /* "previous" and "back to now" only appear while browsing. Keep their slots
+     reserved at all times so the whole control row is static: "next" never
+     moves under the pointer, and "back to now" lives in its own slot in a
+     separate group (a wide gap away from "next"), so it can never take next's
+     place. */
+  .ctl-group a[hidden] { display: inline-block; visibility: hidden; }
   .clock-foot a { color: var(--ink-2); cursor: pointer; white-space: nowrap; }
   .clock-foot a:hover { color: var(--accent-ink); }
   .note { color: var(--muted); font-size: 0.85rem; margin: 1.6rem 0 0; max-width: 40rem; }
@@ -132,10 +136,14 @@
         <span id="chart-meta"></span>
         <span id="countdown"></span>
         <span class="controls">
-          <a id="prev" role="button" tabindex="0" hidden>‹ previous</a>
-          <a id="next" role="button" tabindex="0">next ›</a>
-          <a id="reset" role="button" tabindex="0" hidden>back to now</a>
-          <a href="tree.html">browse all ›</a>
+          <span class="ctl-group">
+            <a id="prev" role="button" tabindex="0" hidden>‹ previous</a>
+            <a id="next" role="button" tabindex="0">next ›</a>
+          </span>
+          <span class="ctl-group">
+            <a id="reset" role="button" tabindex="0" hidden>back to now</a>
+            <a href="tree.html">browse all ›</a>
+          </span>
         </span>
       </div>
     </section>
